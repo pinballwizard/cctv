@@ -1,0 +1,17 @@
+{% extends "main/template.html" %}
+{% load staticfiles %}
+{% block meta %}
+{% endblock meta %}
+{% block title %}
+    Тестовая страница
+{% endblock title %}
+{% block main %}
+    <div class="container-fluid">
+        <div class="row">
+            {{ video }}
+            <video width="400" height="300" controls="controls">
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
+{% endblock main %}

@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load staticfiles %}
+    {% block meta %}
+    {% endblock meta %}
     <meta charset="UTF-8">
-    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'main/script/main.js' %}"></script>
+    <link href="{% static 'main/style/main.css' %}" rel="stylesheet">
+    <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
-
+<header>
+</header>
+<main>
+    {% block main %}
+    {% endblock main %}
+</main>
 </body>
 </html>

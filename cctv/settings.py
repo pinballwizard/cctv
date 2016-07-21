@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'cctv.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': '52.28.14.84',
+        'HOST': '54.93.55.209',
         'PORT': '5432',
         'NAME': 'cctv',
         'USER': 'django',
