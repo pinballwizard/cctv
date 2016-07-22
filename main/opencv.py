@@ -3,7 +3,7 @@ import datetime as dt
 import time
 
 class videocam(object):
-    cur_date = dt.datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+    firstFrame = None
 
     def __init__(self, rec_src, rec_type, rec_int, rec_path, alarm_text):
         self.rec_src = rec_src
@@ -16,16 +16,27 @@ class videocam(object):
         params = list()
         params.append(cv2.IMWRITE_PNG_COMPRESSION)
         params.append(100)
-        cv2.imwrite('{0}detect at {1}.png'.format(self.rec_path, self.cur_date), self.frame, params)
+        cur_date = dt.datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+        cv2.imwrite('{0}detect at {1}.png'.format(self.rec_path, cur_date), self.frame, params)
 
     def show_record(self):
+        camera = cv2.VideoCapture(self.rec_src)
+
+        while True:
+            firstFrame, self.frame = camera.read()
+            cv2.imshow("Security test", self.frame)
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord("q"):
+                break
+        camera.release()
+        cv2.destroyAllWindows()
+
+    def motion_detect(self):
+
         photo_date = 0
         delta_time = 0
         kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
         fgbg = cv2.createBackgroundSubtractorMOG2()
-        firstFrame = None
-
-# Указываем источник видеопотока
         camera = cv2.VideoCapture(self.rec_src)
 
         while True:
@@ -85,4 +96,4 @@ class videocam(object):
 
 logitech = videocam(0, 'photo', 1, '/home/itadmin/detects/', 'alarm!')
 logitech.show_record()
-
+logitech.motion_detect()
