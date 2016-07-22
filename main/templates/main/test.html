@@ -7,10 +7,17 @@
 {% endblock title %}
 {% block main %}
     <div class="container-fluid">
-        <div class="row">
-            <video width="auto" height="auto" controls="controls" loop="loop">
-                <source src="{% static 'main/video/test.mkv' %}">
-            </video>
-        </div>
+{#        {% for device in devices %}#}
+            <div class="row">
+                <video width="auto" height="auto" controls="controls" loop="loop">
+{#                    <source src="rtsp://salix.ksk.loc:7447/55cc614387ff201301415f79_0.sdp">#}
+                    <source src="http://172.16.1.129:8090/test2.swf">
+{#                    <source src="{{ device.stream_url }}">#}
+                </video>
+            </div>
+            <div class="row">
+                <embed src="http://172.16.1.129:8090/test2.swf" width="550" height="400"></embed>
+            </div>
+{#        {% endfor %}#}
     </div>
 {% endblock main %}

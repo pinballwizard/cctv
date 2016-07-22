@@ -22,5 +22,6 @@ from main import views as main_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', main_views.test, name='test'),
     url(r'^test', main_views.test, name='test'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
