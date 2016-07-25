@@ -11,7 +11,7 @@ text = "AHTUNG!!!"
 # Системные переменные, нужны для работы
 photo_date = 0
 delta_time = 0
-kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
 fgbg = cv2.createBackgroundSubtractorMOG2()
 firstFrame = None
 
@@ -19,7 +19,7 @@ firstFrame = None
 # Функция "сделать фоточку" с датой в png формате
 def take_a_photo(src):
     params = list()
-    params.append(cv2.IMWRITE_PNG_COMPRESSION )
+    params.append(cv2.IMWRITE_PNG_COMPRESSION)
     params.append(100)
     cv2.imwrite('%sdetect at %s.png' %(record_path, cur_date), src, params)
 

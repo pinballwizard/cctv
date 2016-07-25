@@ -7,6 +7,9 @@ from main.models import Device
 # Create your views here.
 
 
+
+
+
 def test(request):
     data = {
         'devices': Device.objects.all()
