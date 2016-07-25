@@ -1,6 +1,7 @@
 import cv2
 import datetime as dt
 import time
+import multiprocessing
 
 class videocam(object):
     firstFrame = None
@@ -66,6 +67,7 @@ class videocam(object):
                     if delta_time > self.rec_int:
                         videocam.take_a_photo(self)
                         photo_date = time.time()
+                        print("Gotcha!")
                     else:
                         continue
 # надо переписать чтобы делал видеопоток, а не писал конкретный кадр в видео\сек
@@ -95,5 +97,16 @@ class videocam(object):
 
 
 logitech = videocam(0, 'photo', 1, '/home/itadmin/detects/', 'alarm!')
-logitech.show_record()
-logitech.motion_detect()
+testvideo = videocam('static/main/video/test.mkv', 'photo', 1, '/home/itadmin/detects/', 'gotcha!')
+
+cameras = [
+    logitech,
+    testvideo
+]
+
+pool = multiprocessing.Pool(2)
+
+results = pool.map(videocam.motion_detect, cameras)
+
+pool.close()
+pool.join()
