@@ -1,6 +1,8 @@
 import cv2
 import datetime as dt
 import time
+import imutils
+import multiprocessing
 
 
 class videocam(object):
@@ -12,6 +14,7 @@ class videocam(object):
         self.rec_int = rec_int
         self.rec_path = rec_path
         self.alarm_text = alarm_text
+        self.isv2 = imutils.is_cv2()
 
     def take_a_photo(self):
         params = list()
@@ -49,7 +52,9 @@ class videocam(object):
             thresh = cv2.threshold(frameDelta, 25, 255, cv2.THRESH_BINARY)[1]
             thresh = cv2.dilate(thresh, None, iterations=2)
 # Обводим ее в зеленый прямоугольник и пишем похабные надписи
-            (_, cnts, _) = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            cnts = cnts[0] if self.isv2 else cnts[1]
+
             for c in cnts:
                 if cv2.contourArea(c) < 600:
                     continue
@@ -66,6 +71,7 @@ class videocam(object):
                     if delta_time > self.rec_int:
                         videocam.take_a_photo(self)
                         photo_date = time.time()
+                        print("Gotcha!")
                     else:
                         continue
 # надо переписать чтобы делал видеопоток, а не писал конкретный кадр в видео\сек
@@ -79,10 +85,10 @@ class videocam(object):
 #                        continue
 
 # Выведем картинку на экран
-            # cv2.imshow("In grayscale mask", fgmask)
-            cv2.imshow("In grayscale with thresh", thresh)
-            # cv2.imshow("DeltaFrame", frameDelta)
-            cv2.imshow("Security Feed", self.frame)
+            # cv2.imshow("In grayscale mask {}".format(self.rec_src), fgmask)
+            # cv2.imshow("In grayscale with thresh {}".format(self.rec_src), thresh)
+            # cv2.imshow("DeltaFrame {}".format(self.rec_src), frameDelta)
+            cv2.imshow("Security Feed {}".format(self.rec_src), self.frame)
 
             # Ждем кнопку q для выхода из цикла
             key = cv2.waitKey(1) & 0xFF
@@ -94,6 +100,26 @@ class videocam(object):
         cv2.destroyAllWindows()
 
 
-logitech = videocam(0, 'photo', 1, '/home/itadmin/detects/', 'alarm!')
-logitech.show_record()
-logitech.motion_detect()
+logitech = videocam('static/main/video/test.mkv', 'photo', 1, '/home/itadmin/detects/', 'alarm!')
+testvideo = videocam('static/main/video/test.mkv', 'photo', 1, '/home/itadmin/detects/', 'gotcha!')
+testvideo1 = videocam('static/main/video/test.mkv', 'photo', 1, '/home/itadmin/detects/', 'gotcha!')
+testvideo2 = videocam('static/main/video/test.mkv', 'photo', 1, '/home/itadmin/detects/', 'gotcha!')
+testvideo3 = videocam('static/main/video/test.mkv', 'photo', 1, '/home/itadmin/detects/', 'gotcha!')
+testvideo4 = videocam('static/main/video/test.mkv', 'photo', 1, '/home/itadmin/detects/', 'gotcha!')
+
+cameras = [
+    logitech,
+    testvideo,
+    testvideo1,
+    testvideo2,
+    testvideo3,
+    testvideo4
+
+]
+
+pool = multiprocessing.Pool(6)
+
+results = pool.map(videocam.motion_detect, cameras)
+
+pool.close()
+pool.join()
