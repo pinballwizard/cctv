@@ -9,15 +9,18 @@
     <div class="container-fluid">
 {#        {% for device in devices %}#}
             <div class="row">
-                <video width="auto" height="auto" controls="controls" loop="loop">
+                <video width="auto" height="auto" controls="controls" autoplay="autoplay">
 {#                    <source src="rtsp://salix.ksk.loc:7447/55cc614387ff201301415f79_0.sdp">#}
-                    <source src="http://172.16.1.129:8090/test2.swf">
+                    <source src="http://localhost:8090/test1.webm" type='video/webm; codecs="vp8, vorbis"'>
+{#                    <source src="http://localhost:8090/test2.swf">#}
+{#                    <source src="http://localhost:8090/test3.h265" type='video/h265'>#}
+{#                    <source src="http://localhost:8090/test3.ogg" type='video/ogg'>#}
 {#                    <source src="{{ device.stream_url }}">#}
                 </video>
             </div>
-            <div class="row">
-                <embed src="http://172.16.1.129:8090/test2.swf" width="550" height="400"></embed>
-            </div>
+{#            <div class="row">#}
+{#                <embed src="http://localhost:8090/test1.webm" width="auto" height="auto"></embed>#}
+{#            </div>#}
 {#        {% endfor %}#}
     </div>
 {% endblock main %}
