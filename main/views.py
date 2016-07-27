@@ -5,6 +5,8 @@ from django.http import HttpResponse, Http404
 from main.models import Device
 import subprocess
 
+#ffmpeg -i test.mkv http://localhost:8090/feed1.ffm
+
 
 def start_ffserver():
     try:
