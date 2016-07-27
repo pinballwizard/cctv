@@ -14,7 +14,7 @@ def start_ffserver():
     except:
         print('ffserver dont start')
 
-def videostream_connect():
+# def videostream_connect():
 
 
 def test(request):
