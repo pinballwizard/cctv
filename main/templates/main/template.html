@@ -6,15 +6,60 @@
     {% endblock meta %}
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{% static 'main/script/main.js' %}"></script>
     <link href="{% static 'main/style/main.css' %}" rel="stylesheet">
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
 <header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+{#                    <li class="dropdown">#}
+{#                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#}
+{#                            Телефония#}
+{#                            <span class="caret"></span>#}
+{#                        </a>#}
+{#                        <ul class="dropdown-menu">#}
+{#                            <li><a href="{% url 'phonebook:phonebook' %}">Телефонная книга</a></li>#}
+{#                            <li><a href="{% url 'phonebook:stats' %}">Статистика</a></li>#}
+{#                        </ul>#}
+{#                    </li>#}
+{#                    <li class="dropdown">#}
+{#                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#}
+{#                            SMS#}
+{#                            <span class="caret"></span>#}
+{#                        </a>#}
+{#                        <ul class="dropdown-menu">#}
+{#                            <li><a href="{% url 'sms:stats' %}">Статистика</a></li>#}
+{#                            <li><a href="{% url 'sms:test_sms' %}">Тестовая SMS</a></li>#}
+{#                        </ul>#}
+{#                    </li>#}
+                    {% if user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                {% if user.last_name or user.first_name %}
+                                    {{ user.first_name }} {{ user.last_name }}
+                                {% else %}
+                                    {{ user.username }}
+                                {% endif %}
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'admin:index' %}">Администрирование</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{% url 'logout' %}">Выход</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
 </header>
 <main>
     {% block main %}

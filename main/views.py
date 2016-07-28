@@ -17,6 +17,13 @@ def start_ffserver():
 # def videostream_connect():
 
 
+def camlist(request):
+    data = {
+        'devices': Device.objects.all()
+    }
+    return render(request, 'main/camlist.html', data)
+
+
 def test(request):
     data = {
         'devices': Device.objects.all()

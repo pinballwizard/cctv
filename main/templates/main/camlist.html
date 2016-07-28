@@ -1,0 +1,55 @@
+{% extends "main/template.html" %}
+{% load staticfiles %}
+{% block meta %}
+{% endblock meta %}
+{% block title %}
+    Список камер
+{% endblock title %}
+{% block main %}
+    <div class="container">
+        <div class="row table-responsive">
+            <table class="table table-striped tabel-hover">
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>URL</th>
+                    <th>IP-адрес</th>
+                    <th>MAC-адрес</th>
+                    <th>Протокол</th>
+                    <th>Статус</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for device in devices %}
+                    <tr>
+                        <td id="CameraName">{{ device.name }}</td>
+                        <td id="CameraURL">{{ device.stream_url }}</td>
+                        <td>{{ device.ip }}</td>
+                        <td>{{ device.mac }}</td>
+                        <td>{{ device.protocol }}</td>
+                        <td>{{ device.status }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="CameraModal" tabindex="-1" role="dialog" aria-labelledby="CameraModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="CameraModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <video id="CameraModalVideo" width="auto" height="auto" controls="controls" autoplay="autoplay">
+                        <source src="" type='video/webm; codecs="vp8, vorbis"'>
+                    </video>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main %}
