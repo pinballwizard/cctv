@@ -10,6 +10,7 @@ $(document).ready(function () {
        var CameraURL = $(this).children('#CameraURL').text();
        $('#CameraModalLabel').text(CameraName);
        $('#CameraModalVideo').children('source').attr('src', CameraURL);
+       document.getElementById("CameraModalVideo").play();
        $('#CameraModal').modal('show');
    })
 });
