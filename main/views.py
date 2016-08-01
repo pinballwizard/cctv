@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django import forms
 from django.http import HttpResponse, Http404
 from main.models import Device
+from django.contrib.auth.decorators import login_required
 import subprocess
 
 #ffmpeg -i test.mkv http://localhost:8090/feed1.ffm
@@ -17,6 +18,7 @@ def start_ffserver():
 # def videostream_connect():
 
 
+@login_required
 def camlist(request):
     data = {
         'devices': Device.objects.all()
@@ -24,6 +26,7 @@ def camlist(request):
     return render(request, 'main/camlist.html', data)
 
 
+@login_required
 def test(request):
     data = {
         'devices': Device.objects.all()
