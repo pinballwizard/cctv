@@ -11,6 +11,7 @@
             <table class="table table-striped tabel-hover">
                 <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Название</th>
                     <th>URL</th>
                     <th>IP-адрес</th>
@@ -22,6 +23,7 @@
                 <tbody>
                 {% for device in devices %}
                     <tr>
+                        <td id="CameraID">{{ device.id }}</td>
                         <td id="CameraName">{{ device.name }}</td>
                         <td id="CameraURL">{{ device.stream_url }}</td>
                         <td>{{ device.ip }}</td>
@@ -41,10 +43,10 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="CameraModalLabel"></h4>
                 </div>
-                <div class="modal-body">
-                    <video id="CameraModalVideo" width="auto" height="auto" controls="controls">
-                        <source src="" type='video/webm; codecs="vp8, vorbis"'>
-                    </video>
+                <div class="modal-body" id="img">
+{#                    <video id="CameraModalVideo" width="auto" height="auto" controls="controls">#}
+{#                        <source src="" type='video/webm; codecs="vp8, vorbis"'>#}
+{#                    </video>#}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

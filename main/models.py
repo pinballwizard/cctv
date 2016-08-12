@@ -1,4 +1,5 @@
 from django.db import models
+import av
 
 
 class Device(models.Model):
@@ -21,3 +22,13 @@ class Device(models.Model):
 
     def __str__(self):
         return '{0} -> {1}'.format(self.name, self.stream_url)
+
+    def connect(self):
+        self.container = av.open(self.stream_url)
+        self.video = next(s for s in self.container.streams if s.type == 'video')
+        self.connected = True
+
+    def get_pic(self):
+        for packet in self.container.demux(self.video):
+            for frame in packet.decode():
+                yield frame

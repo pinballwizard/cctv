@@ -9,14 +9,18 @@
     <div class="container-fluid">
 {#        {% for device in devices %}#}
             <div class="row">
-                <video width="auto" height="auto" controls="controls" autoplay="autoplay">
-{#                    <source src="rtsp://salix.ksk.loc:7447/55cc614387ff201301415f79_0.sdp">#}
+                <div id="img">
+{#                    <img>#}
+                </div>
+{#                <video width="auto" height="auto" controls="controls" autoplay="autoplay">#}
+{#                    <source src="rtsp://localhost:5454/test1.webm" type='video/webm; codecs="vp8, vorbis"'>#}
+{#                    <source src="http://localhost:8090/test1.dash" type='video/webm; codecs="vp8, vorbis"'>#}
 {#                    <source src="http://localhost:8090/test1.webm" type='video/webm; codecs="vp9, vorbis"'>#}
 {#                    <source src="http://localhost:8090/test4.mp" type='video/mp4'>#}
 {#                    <source src="http://localhost:8090/test3.h265" type='video/h265'>#}
 {#                    <source src="http://localhost:8090/test3.ogg" type='video/ogg'>#}
 {#                    <source src="{{ device.stream_url }}">#}
-                </video>
+{#                </video>#}
             </div>
 {#            <div class="row">#}
 {#                <embed src="http://localhost:8090/test1.webm" width="auto" height="auto"></embed>#}
